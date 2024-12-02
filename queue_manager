@@ -1,0 +1,14 @@
+Crea un gestore delle code presso un ente pubblico. Il sistema deve creare una coda che permetta agli utenti di prendere il numeretto (da 1 a n) e agli operatori di sapere quanti utenti sono in coda, chiamare il prossimo utente e azzerare la coda.
+se il sistema raggiunge il valore n allora ricomincia da 1.
+Per il momento non usiamo gli oggetti ma solo funzioni. ti do qualche indicazione
+
+max_users_number = input("inserisci il numero massimo di utenti in coda")
+start = 0
+users_queue = []
+
+def get_new_number():
+  start = start+1
+  return start
+
+def call_next_user():
+  ...
