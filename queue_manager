@@ -6,13 +6,42 @@ se il sistema raggiunge il valore n allora ricomincia da 1.
 Per il momento non usiamo gli oggetti ma solo funzioni. ti do qualche indicazione
 '''
 
-max_users_number = input("inserisci il numero massimo di utenti in coda")
-start = 0
-users_queue = []
+'''
+Pseudocodice
+1) prendi numero -> incrementa il contatore e aggiunge alla lista
+2) chiama prossimo -> rimuove e restitusce primo della coda
+3) conta elemeneti in coda
+4) azzera sistema
 
+Appunti:
+- Che succede se inserisco una stringa anziché un numero di partenza per la coda? -> Gestione errori
+- Fare il test pytest (vedi appunti)
+- Provare stampa su file csv (come indicato al telefono)
+- Creare interfaccia con i pulsanti in bootstrap?
+'''
+
+max_users_number = int(input("inserisci il numero massimo di utenti in coda")) # Ho convertito l'input in int altrimenti rimane una stringa
+start = 0 # Numero di partenza per la coda
+users_queue = []  # Lista che conterrà il numero degli utenti in coda
+
+# Funzione per generare un nuovo numero
 def get_new_number():
+  global start  # Con global vado a indicare che useremo una variabile esterne alla funzione
   start = start+1
+  if start > max_users_number:  # Se start raggiunge il massimo, torna a 1
+    start = 1
+  users_queue.append(start) # Il numero di start viene aggiunto alla coda
   return start
 
+# Funzione per chiamare il prossimo utente
 def call_next_user():
-  ...
+  pass
+
+# Funzione per cntare gli utenti in coda
+def count_users():
+  pass
+
+# Funzione per azzerare la coda
+def reset_queue():
+  pass
+
