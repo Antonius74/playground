@@ -4,6 +4,10 @@ Il sistema deve creare una coda che permetta agli utenti di prendere il numerett
 e agli operatori di sapere quanti utenti sono in coda, chiamare il prossimo utente e azzerare la coda.
 se il sistema raggiunge il valore n allora ricomincia da 1.
 Per il momento non usiamo gli oggetti ma solo funzioni. ti do qualche indicazione
+
+ora devi fare un prompt di comandi che chieda all'utente quale azione fare, 
+aggiungi utente, chiama il prossimo utente, ecc e di conseguenza modificherai la lista di attesa. 
+fintantoché l'utente, premendo 0 (o altro carattere) non uscirà dal programma
 '''
 
 '''
