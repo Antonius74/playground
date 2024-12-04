@@ -11,22 +11,25 @@ fintantoché l'utente, premendo 0 (o altro carattere) non uscirà dal programma
 '''
 
 '''
-Pseudocodice
-1) prendi numero -> incrementa il contatore e aggiunge alla lista
-2) chiama prossimo -> rimuove e restitusce primo della coda
-3) conta elemeneti in coda
-4) azzera sistema
-
 Appunti:
-- Che succede se inserisco una stringa anziché un numero di partenza per la coda? -> Gestione errori
+- Gestire situazione in cui venga inserito inizialmente un numero negativo o una stringa? -> Gestione errori
 - Fare il test pytest (vedi appunti)
 - Provare stampa su file csv (come indicato al telefono)
 - Creare interfaccia con i pulsanti in bootstrap?
 '''
 
-max_users_number = int(input("inserisci il numero massimo di utenti in coda")) # Ho convertito l'input in int altrimenti rimane una stringa
-start = 0 # Numero di partenza per la coda
-users_queue = []  # Lista che conterrà il numero degli utenti in coda
+# Setup iniziale e verifica valore corretto
+def initialize_queue():
+    while True:  # Continua a chiedere finché non riceviamo un input valido
+        try:
+            max_users = int(input("Inserisci il numero massimo di utenti in coda: "))
+            if max_users <= 0:
+                print("Errore: Il valore deve essere un numero positivo. Riprova.")
+                continue  # Ritorna all'inizio del ciclo
+            return max_users  # Esce dalla funzione con il valore valido
+        except ValueError:
+            print("Errore: Devi inserire un numero intero. Riprova.") # Il ciclo continuerà automaticamente
+
 
 # Funzione per generare un nuovo numero
 def get_new_number():
@@ -39,13 +42,85 @@ def get_new_number():
 
 # Funzione per chiamare il prossimo utente
 def call_next_user():
-  pass
+  if len(users_queue) > 0: # Devo verificare se c'è qualcno in coda
+    next_user = users_queue.pop(0) # Con la funzione pop rimuovo il primo della coda (Indice 0)
+    return next_user
+  else:
+    return None # Se non ci sono utenti in attesa restituisce None
 
 # Funzione per cntare gli utenti in coda
 def count_users():
-  pass
+  return len(users_queue) # Conta quanti utenti sono attualmente in coda
 
 # Funzione per azzerare la coda
 def reset_queue():
-  pass
+  global start
+  users_queue.clear()
+  start = 0
 
+
+
+# Mostra il menu delle opzioni disponibili
+def show_menu(): 
+    print("\n=== Sistema Gestione Code ===")
+    print("1. Aggiungi utente alla coda")
+    print("2. Chiama prossimo utente")
+    print("3. Visualizza numero utenti in coda")
+    print("4. Azzera la coda")
+    print("0. Esci dal programma")
+    print("===========================")
+
+# Gestione input utente
+def process_menu_choice():
+    try:
+        scelta = int(input("\nScegli un'opzione (0-4): "))
+        
+        if scelta == 0:
+            print("Grazie per aver usato il sistema. Arrivederci!")
+            return False  # Segnala che il programma deve terminare
+            
+        elif scelta == 1:
+            nuovo_numero = get_new_number()
+            print(f"Nuovo utente aggiunto con numero: {nuovo_numero}")
+            
+        elif scelta == 2:
+            prossimo = call_next_user()
+            if prossimo is not None:
+                print(f"Chiamato utente numero: {prossimo}")
+            else:
+                print("Nessun utente in coda")
+                
+        elif scelta == 3:
+            numero_utenti = count_users()
+            print(f"Utenti attualmente in coda: {numero_utenti}")
+            
+        elif scelta == 4:
+            reset_queue()
+            print("La coda è stata azzerata")
+            
+        else:
+            print("Opzione non valida. Scegli un numero tra 0 e 4")
+            
+        return True  # Segnala che il programma deve continuare
+        
+    except ValueError:
+        print("Errore: devi inserire un numero valido")
+        return True  # Continua nonostante l'errore
+
+def main():
+    """
+    Funzione principale che gestisce il flusso del programma.
+    """
+    while True:
+        show_menu()
+        if not process_menu_choice():  # Se process_menu_choice restituisce False, terminiamo
+            break
+
+# Inizializziamo le variabili globali e avviamo il programma
+max_users_number = initialize_queue()
+start = 0
+users_queue = []
+
+# Avvio del programma
+if __name__ == "__main__":
+    main()
