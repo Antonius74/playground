@@ -3,3 +3,4 @@ test.md
 test_queue_manager.py
 __pycache__
 .pytest_cache
+order_manager.md
