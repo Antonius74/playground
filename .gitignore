@@ -5,3 +5,4 @@ __pycache__
 .pytest_cache
 order_manager.md
 queue_manager.md
+.DS_Store
